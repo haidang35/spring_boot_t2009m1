@@ -1,0 +1,25 @@
+{
+	"info": {
+		"_postman_id": "b6edd2db-fdee-459e-88e9-f0ec6ac3c7e2",
+		"name": "SpringBootT2009M1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Employee List",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Create new employee",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
