@@ -16,7 +16,7 @@ import {
 } from "reactstrap";
 import Form from "../../components/form/Form";
 
-class CreateRoad extends Form {
+class CreateStreet extends Form {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,13 +48,21 @@ class CreateRoad extends Form {
     this._validateForm();
     if (this._isFormValid()) {
       const { name, foundingDate, desc, status, districtId } = this.state.form;
+      const { districts } = this.state;
+      let district =  {id: 0, name: ''};
+      districts.forEach(item => {
+        if(item.id == districtId.value) {
+          district = item;
+        }
+     });
+     console.log('asdasd', district);
       axios
-        .post("http://localhost:8080/api/v1/roads", {
+        .post("http://localhost:8080/api/v1/streets", {
           name: name.value,
           foundingDate: foundingDate.value,
           description: desc.value,
           status: status.value,
-          districtId: districtId.value,
+          district,
         })
         .then((res) => {
           this.setState({
@@ -68,7 +76,7 @@ class CreateRoad extends Form {
     const { name, foundingDate, status, desc, districtId } =
       this.state.form;
     const { isSuccess, districts } = this.state;
-    if (isSuccess) return <Navigate to={"/roads"} />;
+    if (isSuccess) return <Navigate to={"/streets"} />;
     return (
       <Row>
         <Col>
@@ -78,7 +86,7 @@ class CreateRoad extends Form {
           <Card>
             <CardTitle tag="h6" className="border-bottom p-3 mb-0">
               <i className="bi bi-bell me-2"> </i>
-              Create Road
+              Create Street
             </CardTitle>
             <CardBody>
               {/* <Form action="#"> */}
@@ -167,4 +175,4 @@ class CreateRoad extends Form {
     );
   }
 }
-export default CreateRoad;
+export default CreateStreet;

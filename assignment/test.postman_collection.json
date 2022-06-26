@@ -6,10 +6,10 @@
 	},
 	"item": [
 		{
-			"name": "Road",
+			"name": "Street",
 			"item": [
 				{
-					"name": "Get road list",
+					"name": "Get street list",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -30,7 +30,7 @@
 					"response": []
 				},
 				{
-					"name": "Create new road",
+					"name": "Create new street",
 					"request": {
 						"method": "POST",
 						"header": [],

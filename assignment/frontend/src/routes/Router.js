@@ -16,8 +16,8 @@ const Grid = lazy(() => import("../views/ui/Grid"));
 const Tables = lazy(() => import("../views/ui/Tables"));
 const Forms = lazy(() => import("../views/ui/Forms"));
 const Breadcrumbs = lazy(() => import("../views/ui/Breadcrumbs"));
-const RoadList = lazy(() => import("../views/Road/Index"));
-const CreateRoad = lazy(() => import("../views/Road/CreateRoad"));
+const StreetList = lazy(() => import("../views/Street/Index"));
+const CreateStreet = lazy(() => import("../views/Street/CreateStreet"));
 
 /*****Routes******/
 
@@ -26,7 +26,7 @@ const ThemeRoutes = [
     path: "/",
     element: <FullLayout />,
     children: [
-      { path: "/", element: <Navigate to="/employees" /> },
+      { path: "/", element: <Navigate to="/streets" /> },
       // { path: "/starter", exact: true, element: <Starter /> },
       // { path: "/about", exact: true, element: <About /> },
       // { path: "/alerts", exact: true, element: <Alerts /> },
@@ -37,8 +37,8 @@ const ThemeRoutes = [
       // { path: "/table", exact: true, element: <Tables /> },
       // { path: "/forms", exact: true, element: <Forms /> },
       // { path: "/breadcrumbs", exact: true, element: <Breadcrumbs /> },
-      { path: "/roads", exact: true, element: <RoadList /> },
-      { path: "/roads/create", exact: true, element: <CreateRoad /> },
+      { path: "/streets", exact: true, element: <StreetList /> },
+      { path: "/streets/create", exact: true, element: <CreateStreet /> },
     ],
   },
 ];

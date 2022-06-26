@@ -19,18 +19,7 @@ public class DistrictRestApi {
     private DistrictService districtService;
 
     @GetMapping
-    public List<District> getListDistrict() {
-        return districtService.findAll();
-    }
-
-    @GetMapping("/seed")
-    public ResponseEntity<String> seeding() {
-        String[] districts = {"Cầu Giấy", "Nam Từ Liêm", "Bắc Từ Liêm", "Hoàng Mai", "Hoàn Kiếm", "Đống Đa", "Ba Đình", "Hai Bà Trưng", "Thanh Xuân"};
-        for (String district : districts) {
-            District newDistrict = new District();
-            newDistrict.setName(district);
-            districtService.save(newDistrict);
-        }
-        return ResponseEntity.ok("Seeding success");
+    public ResponseEntity<List<District>> getListDistrict() {
+        return ResponseEntity.ok(districtService.findAll());
     }
 }

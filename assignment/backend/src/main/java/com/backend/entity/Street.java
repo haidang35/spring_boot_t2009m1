@@ -5,9 +5,7 @@ import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -15,9 +13,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "roads")
+@Table(name = "streets")
 @ToString
-public class Road {
+public class Street {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -29,8 +27,8 @@ public class Road {
     @NotNull
     private RoadStatus status;
     @NotNull
-    private int districtId;
-//    @ManyToOne
-//    @JoinColumn(name = "districtId", nullable = false)
-//    private District district;
+//    private int districtId;
+    @ManyToOne
+    @JoinColumn(name = "districtId", nullable = false)
+    private District district;
 }

@@ -1,17 +1,23 @@
 package com.backend.restApi;
 
 import com.backend.entity.District;
-import com.backend.entity.Road;
+import com.backend.entity.Street;
 import com.backend.entity.entityEnum.RoadStatus;
 import com.backend.service.DistrictService;
-import com.backend.service.RoadService;
+import com.backend.service.StreetService;
+import org.hibernate.engine.spi.SessionLazyDelegator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 
 @RestController
@@ -20,76 +26,83 @@ public class SeedRestApi {
     @Autowired
     private DistrictService districtService;
     @Autowired
-    private RoadService roadService;
+    private StreetService streetService;
+    @PersistenceContext
+    private EntityManager entityManager;
+    private static final String TRUNCATE_TABLE_STREET = "TRUNCATE TABLE streets; ";
+    private static final String TRUNCATE_TABLE_DISTRICT = "TRUNCATE TABLE districts;";
+    private static final String DISABLE_FOREIGN_KEY_CHECK = "SET FOREIGN_KEY_CHECKS = 0;";
+    private static final String ENABLE_FOREIGN_KEY_CHECK = "SET FOREIGN_KEY_CHECKS = 1;";
 
     @GetMapping
-    @Query(
-            value = "TRUNCATE TABLE roads; TRUNCATE TABLE districts;",
-            nativeQuery = true
-    )
+    @Transactional
     public ResponseEntity<String> seeding() {
+        entityManager.createNativeQuery(DISABLE_FOREIGN_KEY_CHECK).executeUpdate();
+        entityManager.createNativeQuery(TRUNCATE_TABLE_STREET).executeUpdate();
+        entityManager.createNativeQuery(TRUNCATE_TABLE_DISTRICT).executeUpdate();
+        entityManager.createNativeQuery(ENABLE_FOREIGN_KEY_CHECK).executeUpdate();
         String[] districts = {"Cầu Giấy", "Nam Từ Liêm", "Bắc Từ Liêm", "Hoàng Mai", "Hoàn Kiếm", "Đống Đa", "Ba Đình", "Hai Bà Trưng", "Thanh Xuân"};
         for (String district : districts) {
             districtService.save(District.builder()
                     .name(district).build());
         }
-        roadService.save(Road.builder()
+        streetService.save(Street.builder()
                         .name("Hoàng Quốc Việt")
-                        .districtId(1)
+                        .district(District.builder().id(1).build())
                         .foundingDate(LocalDate.now())
                         .status(RoadStatus.USING)
                         .build());
-        roadService.save(Road.builder()
+        streetService.save(Street.builder()
                 .name("Trần Duy Hưng")
-                .districtId(1)
+                .district(District.builder().id(1).build())
                 .foundingDate(LocalDate.now())
                 .status(RoadStatus.USING)
                 .build());
-        roadService.save(Road.builder()
+        streetService.save(Street.builder()
                 .name("Phạm Hùng")
-                .districtId(2)
+                .district(District.builder().id(2).build())
                 .foundingDate(LocalDate.now())
                 .status(RoadStatus.USING)
                 .build());
-        roadService.save(Road.builder()
+        streetService.save(Street.builder()
                 .name("Mỹ Đình")
-                .districtId(2)
+                .district(District.builder().id(2).build())
                 .foundingDate(LocalDate.now())
                 .status(RoadStatus.USING)
                 .build());
-        roadService.save(Road.builder()
+        streetService.save(Street.builder()
                 .name("Phạm Văn Đồng")
-                .districtId(3)
+                .district(District.builder().id(3).build())
                 .foundingDate(LocalDate.now())
                 .status(RoadStatus.USING)
                 .build());
-        roadService.save(Road.builder()
+        streetService.save(Street.builder()
                 .name("Cổ Nhuế")
-                .districtId(3)
+                .district(District.builder().id(3).build())
                 .foundingDate(LocalDate.now())
                 .status(RoadStatus.USING)
                 .build());
-        roadService.save(Road.builder()
+        streetService.save(Street.builder()
                 .name("Giải Phóng")
-                .districtId(4)
+                .district(District.builder().id(4).build())
                 .foundingDate(LocalDate.now())
                 .status(RoadStatus.USING)
                 .build());
-        roadService.save(Road.builder()
+        streetService.save(Street.builder()
                 .name("Giáp Bát")
-                .districtId(4)
+                .district(District.builder().id(4).build())
                 .foundingDate(LocalDate.now())
                 .status(RoadStatus.USING)
                 .build());
-        roadService.save(Road.builder()
+        streetService.save(Street.builder()
                 .name("Hàng Bồ")
-                .districtId(5)
+                .district(District.builder().id(5).build())
                 .foundingDate(LocalDate.now())
                 .status(RoadStatus.USING)
                 .build());
-        roadService.save(Road.builder()
+        streetService.save(Street.builder()
                 .name("Hàng Mã")
-                .districtId(5)
+                .district(District.builder().id(5).build())
                 .foundingDate(LocalDate.now())
                 .status(RoadStatus.USING)
                 .build());

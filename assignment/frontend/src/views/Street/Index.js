@@ -37,7 +37,7 @@ class Index extends Component {
 
   fetchData = () => {
     axios
-      .get("http://localhost:8080/api/v1/roads?districtId=0&name=")
+      .get("http://localhost:8080/api/v1/streets?districtId=0&name=")
       .then((res) => {
         this.setState({
           data: res.data,
@@ -48,7 +48,7 @@ class Index extends Component {
   onSearch = () => {
     const {search, districtId} = this.state;
     axios
-    .get(`http://localhost:8080/api/v1/roads?districtId=${districtId}&name=${search}`)
+    .get(`http://localhost:8080/api/v1/streets?districtId=${districtId}&name=${search}`)
     .then((res) => {
       this.setState({
         data: res.data,
@@ -62,11 +62,11 @@ class Index extends Component {
       <>
         <Card>
           <CardBody>
-            <CardTitle tag="h5">Roads</CardTitle>
+            <CardTitle tag="h5">Streets</CardTitle>
             <CardSubtitle className="mb-2 text-muted" tag="h6">
               Overview of the projects
             </CardSubtitle>
-            <Link to={"/roads/create"}>
+            <Link to={"/streets/create"}>
               <Button>Create New</Button>
             </Link>
             <div className="row" style={{ marginTop: "2rem" }}>
@@ -113,7 +113,7 @@ class Index extends Component {
                   <tr key={index} className="border-top">
                     <td>{item.id}</td>
                     <td>{item.name}</td>
-                    <td>{item.districtId}</td>
+                    <td>{item.district.name}</td>
                     <td>{item.foundingDate}</td>
                     <td>{item.status}</td>
                     <td>
