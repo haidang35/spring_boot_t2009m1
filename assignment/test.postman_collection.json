@@ -14,7 +14,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/roads",
+							"raw": "http://localhost:8080/api/v1/streets?districtId=1&name=",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -23,7 +23,17 @@
 							"path": [
 								"api",
 								"v1",
-								"roads"
+								"streets"
+							],
+							"query": [
+								{
+									"key": "districtId",
+									"value": "1"
+								},
+								{
+									"key": "name",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -36,7 +46,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Phạm Hùng\",\r\n    \"foundingDate\": \"1975-12-12\",\r\n    \"status\": 1,\r\n    \"districtId\": 22\r\n}",
+							"raw": "{\r\n    \"name\": \"Phạm Hùng\",\r\n    \"district\": {\r\n        \"id\": 2,\r\n        \"name\": \"Nam Từ Liêm\"\r\n    },\r\n    \"foundingDate\": \"2022-06-23\",\r\n    \"description\": \"\",\r\n    \"status\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -44,7 +54,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/roads",
+							"raw": "http://localhost:8080/api/v1/streets",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -53,7 +63,7 @@
 							"path": [
 								"api",
 								"v1",
-								"roads"
+								"streets"
 							]
 						}
 					},
@@ -70,7 +80,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/districts/seed",
+							"raw": "http://localhost:8080/api/v1/seed/generate",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -79,8 +89,8 @@
 							"path": [
 								"api",
 								"v1",
-								"districts",
-								"seed"
+								"seed",
+								"generate"
 							]
 						}
 					},
@@ -95,7 +105,20 @@
 					"name": "Get list",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/districts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"districts"
+							]
+						}
 					},
 					"response": []
 				}
