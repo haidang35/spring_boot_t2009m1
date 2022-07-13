@@ -22,29 +22,29 @@ public class ProductRestApi {
     ProductRepository productRepository;
 
     @GetMapping
-    public ResponseEntity<List<Product>> getList(
+    public ResponseEntity<?> getList(
         @RequestParam(required = false) String name,
         @RequestParam(required = false) String color,
         @RequestParam(required = false) String size,
         @RequestParam(required = false) String gender,
-        @RequestParam(required = false, defaultValue = "9") Integer status,
+        @RequestParam(required = false, defaultValue = "0") Integer status,
         @RequestParam(required = false, defaultValue = "0") Double price
     )
     {
         Specification<Product> productSpecification = Specification.where(null);
-        if(name != null) {
+        if( name != null && name.length() > 0) {
             productSpecification.and(new ProductSpecification(new SearchCriteria("name", ":", name)));
         }
-        if(color != null) {
+        if(color != null && color.length() > 0) {
             productSpecification.and(new ProductSpecification(new SearchCriteria("color", ":", color)));
         }
-        if(size != null) {
+        if(size != null && size.length() > 0) {
             productSpecification.and(new ProductSpecification(new SearchCriteria("size", ":", size)));
         }
-        if(gender != null) {
+        if(gender != null && gender.length() > 0) {
             productSpecification.and(new ProductSpecification(new SearchCriteria("gender", ":", gender)));
         }
-        if(status == 0 || status == 1) {
+        if(status != 0) {
             productSpecification.and(new ProductSpecification(new SearchCriteria("status", ":", gender)));
         }
         return ResponseEntity.ok(productRepository.findAll(productSpecification));

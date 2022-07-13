@@ -17,7 +17,6 @@ public class ProductSpecification implements Specification<Product> {
     @Override
     public Predicate toPredicate
             (Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-
         if (criteria.getOperation().equalsIgnoreCase(">")) {
             return builder.greaterThanOrEqualTo(
                     root.<String> get(criteria.getKey()), criteria.getValue().toString());
@@ -28,6 +27,7 @@ public class ProductSpecification implements Specification<Product> {
         }
         else if (criteria.getOperation().equalsIgnoreCase(":")) {
             if (root.get(criteria.getKey()).getJavaType() == String.class) {
+                System.out.println("8888888888888888888");
                 return builder.like(
                         root.<String>get(criteria.getKey()), "%" + criteria.getValue() + "%");
             } else {
