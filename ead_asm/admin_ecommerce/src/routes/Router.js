@@ -24,8 +24,6 @@ const Grid = lazy(() => import("../views/ui/Grid"));
 const Tables = lazy(() => import("../views/ui/Tables"));
 const Forms = lazy(() => import("../views/ui/Forms"));
 const Breadcrumbs = lazy(() => import("../views/ui/Breadcrumbs"));
-const StreetList = lazy(() => import("../views/Street/Index"));
-const CreateStreet = lazy(() => import("../views/Street/CreateStreet"));
 
 /*****Routes******/
 

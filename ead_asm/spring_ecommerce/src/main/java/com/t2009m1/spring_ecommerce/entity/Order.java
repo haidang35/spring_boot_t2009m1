@@ -48,6 +48,6 @@ public class Order extends BaseEntity {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<OrderDetail> orderDetails;
     @ManyToOne
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    @JoinColumn(name = "userId", insertable = false, updatable = false)
     private User user;
 }

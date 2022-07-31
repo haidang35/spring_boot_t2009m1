@@ -8,10 +8,8 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Builder
-@RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 @Table(name = "cart_items")
 public class CartItem {

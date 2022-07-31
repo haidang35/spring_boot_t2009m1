@@ -1,15 +1,17 @@
 import React from "react";
 import { menuItems } from "../../configs/LayoutConfig";
+import { Link } from "react-router-dom";
 import { ROUTES } from "../../routes/Router";
-import {Link} from "react-router-dom";
+import authService from "../../modules/auth/services/AuthService";
+import shoppingCartService from "../../modules/shop/services/ShoppingCartService";
 
-const Header = () => {
+const HeaderV2 = () => {
   return (
     <>
       {/* HEADER AREA START (header-5) */}
-      <header className="ltn__header-area ltn__header-5 ltn__header-transparent gradient-color-4---">
+      <header className="ltn__header-area ltn__header-5 ltn__header-transparent gradient-color-2">
         {/* ltn__header-top-area start */}
-        <div className="ltn__header-top-area">
+        <div className="ltn__header-top-area d-none">
           <div className="container">
             <div className="row">
               <div className="col-md-7">
@@ -100,19 +102,19 @@ const Header = () => {
         </div>
         {/* ltn__header-top-area end */}
         {/* ltn__header-middle-area start */}
-        <div className="ltn__header-middle-area ltn__header-sticky ltn__sticky-bg-white sticky-active-into-mobile--- plr--9---">
+        <div className="ltn__header-middle-area ltn__header-sticky ltn__sticky-bg-black plr--9---">
           <div className="container">
             <div className="row">
               <div className="col">
                 <div className="site-logo-wrap">
                   <div className="site-logo">
                     <Link to={ROUTES.HOME_PAGE}>
-                      <img src="img/logo.png" alt="Logo" />
+                      <img src="img/logo-2.png" alt="Logo" />
                     </Link>
                   </div>
                 </div>
               </div>
-              <div className="col header-menu-column menu-color-white---">
+              <div className="col header-menu-column menu-color-white">
                 <div className="header-menu d-none d-xl-block">
                   <nav>
                     <div className="ltn__main-menu">
@@ -159,20 +161,29 @@ const Header = () => {
                       <a href="#">
                         <i className="icon-user" />
                       </a>
-                      <ul>
-                        <li>
-                          <a href="login.html">Sign in</a>
-                        </li>
-                        <li>
-                          <a href="register.html">Register</a>
-                        </li>
-                        <li>
-                          <a href="account.html">My Account</a>
-                        </li>
-                        <li>
-                          <a href="wishlist.html">Wishlist</a>
-                        </li>
-                      </ul>
+                      {!authService.isLogged() ? (
+                        <ul>
+                          <li>
+                            <Link to={ROUTES.LOGIN_PAGE}>Sign in</Link>
+                          </li>
+                          <li>
+                            <Link to={ROUTES.REGISTER_PAGE}>Register</Link>
+                          </li>
+                        </ul>
+                      ) : (
+                        <ul>
+                          <li>
+                            <a href="account.html">My Account</a>
+                          </li>
+                          <li>
+                            <a href="wishlist.html">Wishlist</a>
+                          </li>
+                          <li onClick={() => authService.logout()}>
+                            <a href="#">Logout</a>
+                          </li>
+                        </ul>
+                      )}
+                      <ul></ul>
                     </li>
                   </ul>
                 </div>
@@ -183,7 +194,7 @@ const Header = () => {
                     className="ltn__utilize-toggle"
                   >
                     <i className="icon-shopping-cart" />
-                    <sup>2</sup>
+                    <sup>{shoppingCartService.getCartItemsQuantity()}</sup>
                   </a>
                 </div>
                 {/* mini-cart */}
@@ -218,4 +229,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderV2;

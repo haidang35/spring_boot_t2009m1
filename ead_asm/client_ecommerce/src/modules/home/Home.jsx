@@ -1,10 +1,14 @@
 import React from "react";
 import { AddLibrary } from "../../App";
+import Header from "../../shared/layouts/Header";
+import Menu from "../../shared/layouts/Menu";
 import Script from "../../shared/layouts/Script";
 
 const Home = () => {
   return (
     <>
+      <Header />
+      <Menu />
       <div className="ltn__utilize-overlay" />
       {/* SLIDER AREA START (slider-3) */}
       <div className="ltn__slider-area ltn__slider-3  section-bg-1">

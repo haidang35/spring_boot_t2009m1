@@ -13,7 +13,7 @@ public class ProductClientApi {
 
     @GetMapping
     public ResponseEntity<?> findAll(@RequestParam(defaultValue = "1") Integer page,
-                                     @RequestParam(defaultValue = "10") Integer limit,
+                                     @RequestParam(defaultValue = "21") Integer limit,
                                      @RequestParam(defaultValue = "createdAt") String sortBy) {
         return ResponseEntity.ok(productService.findAll(page, limit, sortBy));
     }
