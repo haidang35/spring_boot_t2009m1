@@ -1,7 +1,6 @@
 package com.t2009m1.spring_ecommerce.service;
 
 import com.t2009m1.spring_ecommerce.entity.Product;
-import com.t2009m1.spring_ecommerce.repository.CategoryRepository;
 import com.t2009m1.spring_ecommerce.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -9,7 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service

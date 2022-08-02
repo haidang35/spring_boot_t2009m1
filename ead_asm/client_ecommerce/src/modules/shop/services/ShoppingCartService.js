@@ -83,6 +83,10 @@ class ShoppingCartService {
     });
     return totalPrice;
   };
+
+  removeCart = () => {
+    localStorage.removeItem(SHOPPING_CART_KEY);
+  }
 }
 
 const shoppingCartService = new ShoppingCartService();

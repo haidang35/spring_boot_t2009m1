@@ -2,15 +2,12 @@ package com.t2009m1.spring_ecommerce.service;
 
 import com.t2009m1.spring_ecommerce.entity.Category;
 import com.t2009m1.spring_ecommerce.repository.CategoryRepository;
-import com.t2009m1.spring_ecommerce.service.base.BaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
-import java.util.List;
 import java.util.Optional;
 
 @Service

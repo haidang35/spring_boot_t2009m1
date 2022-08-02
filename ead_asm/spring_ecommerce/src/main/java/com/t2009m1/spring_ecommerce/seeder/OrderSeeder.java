@@ -10,7 +10,6 @@ import com.t2009m1.spring_ecommerce.repository.OrderRepository;
 import com.t2009m1.spring_ecommerce.util.DateTimeHelper;
 import com.t2009m1.spring_ecommerce.util.NumberHelper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

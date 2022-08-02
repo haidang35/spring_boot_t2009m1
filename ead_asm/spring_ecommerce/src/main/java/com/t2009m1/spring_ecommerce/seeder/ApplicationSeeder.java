@@ -1,6 +1,5 @@
 package com.t2009m1.spring_ecommerce.seeder;
 
-import com.t2009m1.spring_ecommerce.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
