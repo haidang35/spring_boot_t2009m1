@@ -1,2 +1,20 @@
-package com.t2009m1.entity;public class IdentityCard {
+package com.t2009m1.entity;
+
+import lombok.*;
+
+import javax.persistence.*;
+
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Entity
+@Table(name = "identityCards")
+public class IdentityCard {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String fullName;
 }

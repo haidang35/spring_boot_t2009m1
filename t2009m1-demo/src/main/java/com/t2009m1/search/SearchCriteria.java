@@ -1,4 +1,4 @@
-package com.backend.specification;
+package com.t2009m1.search;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

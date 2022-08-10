@@ -38,7 +38,7 @@ public class TodoApi {
         if(todoSaved == null) {
             return new ResponseEntity<>(todoSaved, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(todoSaved, HttpStatus.OK);
+        return new ResponseEntity<>(todoSaved, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

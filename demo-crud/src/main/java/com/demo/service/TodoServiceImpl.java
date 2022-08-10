@@ -2,6 +2,7 @@ package com.demo.service;
 
 import com.demo.entity.Todo;
 import com.demo.repository.TodoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,11 +10,8 @@ import java.util.List;
 
 @Service
 public class TodoServiceImpl implements TodoService{
+    @Autowired
     private TodoRepository todoRepository;
-
-    public TodoServiceImpl(TodoRepository todoRepository) {
-        this.todoRepository = todoRepository;
-    }
 
     @Override
     public List<Todo> findAll() {

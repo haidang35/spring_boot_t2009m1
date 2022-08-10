@@ -13,6 +13,7 @@ import java.sql.Timestamp;
 @Setter
 @AllArgsConstructor
 @Entity
+@ToString
 public class Todo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

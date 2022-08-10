@@ -27,7 +27,7 @@ public class StreetRestApi {
     @GetMapping
     public ResponseEntity<List<Street>> getRoadList(@RequestParam(required = false) String name, @RequestParam(required = false) int districtId) {
         StreetSpecification spec1 = new StreetSpecification(new SearchCriteria("name", ":", name));
-//        StreetSpecification spec2 = new StreetSpecification(new SearchCriteria("districtId", ":", districtId));
+//        StreetSpecificatiSon spec2 = new StreetSpecification(new SearchCriteria("districtId", ":", districtId));
         if(name.length() > 0 && districtId > 0) {
             return ResponseEntity.ok(streetService.findAll(Specification.where(spec1).and(StreetSpecification.hasDistrictWithId(districtId))));
         }else if(name.length() > 0) {

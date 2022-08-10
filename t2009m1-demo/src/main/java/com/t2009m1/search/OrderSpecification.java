@@ -1,5 +1,6 @@
 package com.t2009m1.search;
 
+import com.t2009m1.entity.Account;
 import lombok.*;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -32,6 +33,13 @@ public class OrderSpecification implements Specification<Order> {
             } else {
                 return builder.equal(root.get(criteria.getKey()), criteria.getValue());
             }
+        }
+        else if(criteria.getOperation().equalsIgnoreCase("join")) {
+            Join<com.t2009m1.entity.Order, Account> orderAccountJoin = root.join("account");
+            return builder.or(
+              builder.like(root.get("id"), "%" + criteria.getValue() + "%"),
+              builder.like(orderAccountJoin.get("name"), "%" + criteria.getValue() + "%")
+            );
         }
         return null;
     }
