@@ -48,7 +48,7 @@ public class TblStudentRestApi {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable long id, @RequestBody TblStudent tblStudent) {
         TblStudent tblStudent1 = tblStudentService.update(id, tblStudent);
-        if(tblStudent == null) {
+        if(tblStudent1 == null) {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(tblStudentService);
