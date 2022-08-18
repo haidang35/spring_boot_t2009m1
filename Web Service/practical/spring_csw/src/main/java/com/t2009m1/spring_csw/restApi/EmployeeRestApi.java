@@ -11,6 +11,7 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/v1/employees")
+@CrossOrigin("*")
 public class EmployeeRestApi {
     final EmployeeService employeeService;
 

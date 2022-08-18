@@ -41,11 +41,7 @@ public class EmployeeServiceIplm implements EmployeeService{
         if(employeeOptional.isPresent()) {
             Employee employee = employeeOptional.get();
             employee.setName(employeeUpdate.getName());
-            employee.setEmail(employeeUpdate.getEmail());
-            employee.setPhone(employeeUpdate.getPhone());
-            employee.setAddress(employeeUpdate.getAddress());
-            employee.setCode(employeeUpdate.getCode());
-            employee.setBirthday(employeeUpdate.getBirthday());
+            employee.setSalary(employeeUpdate.getSalary());
             return employeeRepository.save(employee);
         }
         return null;
