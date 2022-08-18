@@ -10,6 +10,7 @@ import {
   Button,
   Input,
 } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 class Index extends Component {
   constructor(props) {
@@ -19,6 +20,8 @@ class Index extends Component {
       districts: [],
       search: "",
       districtId: 0,
+      itemDelete: {},
+      isDelete: false,
     };
   }
 
@@ -27,17 +30,38 @@ class Index extends Component {
   }
 
   fetchData = () => {
-    axios
-      .get("http://localhost:8080/api/v1/employees")
+    axios.get("http://localhost:8080/api/v1/employees").then((res) => {
+      this.setState({
+        data: res.data,
+      });
+    });
+  };
+
+  setDelete = () => {
+    this.setState({
+      isDelete: !this.state.isDelete,
+    });
+  };
+
+  handleChooseDelete = (item) => {
+    this.setState({
+      itemDelete: item,
+      isDelete: true,
+    });
+  };
+
+  handleDelete = async () => {
+    const { itemDelete } = this.state;
+    await axios
+      .delete(`http://localhost:8080/api/v1/employees/${itemDelete.id}`)
       .then((res) => {
-        this.setState({
-          data: res.data,
-        });
+        this.fetchData();
+        this.setDelete();
       });
   };
 
   render() {
-    const { data, search } = this.state;
+    const { data, search, isDelete, itemDelete } = this.state;
     return (
       <>
         <Card>
@@ -60,7 +84,9 @@ class Index extends Component {
                 />
               </div>
               <div className="col-md-3">
-                <Button onClick={this.onSearch} color="primary">Search</Button>
+                <Button onClick={this.onSearch} color="primary">
+                  Search
+                </Button>
               </div>
             </div>
             <Table className="no-wrap mt-3 align-middle" responsive borderless>
@@ -79,10 +105,17 @@ class Index extends Component {
                     <td>{item.name}</td>
                     <td>{item.salary}</td>
                     <td>
-                      <Button color="primary" style={{ marginRight: "1rem" }}>
-                        Edit
+                      <Link to={`/employees/${item.id}`}>
+                        <Button color="primary" style={{ marginRight: "1rem" }}>
+                          Edit
+                        </Button>
+                      </Link>
+                      <Button
+                        color="danger"
+                        onClick={() => this.handleChooseDelete(item)}
+                      >
+                        Delete
                       </Button>
-                      <Button color="danger">Delete</Button>
                     </td>
                   </tr>
                 ))}
@@ -90,6 +123,20 @@ class Index extends Component {
             </Table>
           </CardBody>
         </Card>
+        <Modal isOpen={isDelete} toggle={this.setDelete}>
+          <ModalHeader toggle={this.setDelete}>Confirmation Delete</ModalHeader>
+          <ModalBody>
+            Are you sure to delete {itemDelete && itemDelete.name}
+          </ModalBody>
+          <ModalFooter>
+            <Button color="danger" onClick={this.handleDelete}>
+              Delete
+            </Button>{" "}
+            <Button color="secondary" onClick={this.setDelete}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        </Modal>
       </>
     );
   }

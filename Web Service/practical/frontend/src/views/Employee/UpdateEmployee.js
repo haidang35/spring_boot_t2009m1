@@ -15,6 +15,11 @@ import {
   FormFeedback,
 } from "reactstrap";
 import Form from "../../components/form/Form";
+import { useParams } from "react-router-dom";
+
+function withParams(Component) {
+  return (props) => <Component {...props} params={useParams()} />;
+}
 
 class UpdateEmployee extends Form {
   constructor(props) {
@@ -26,6 +31,7 @@ class UpdateEmployee extends Form {
       }),
       isSuccess: false,
       data: {},
+
     };
   }
 
@@ -34,19 +40,24 @@ class UpdateEmployee extends Form {
   }
 
   getData = async () => {
-    await axios.get("http://localhost:8080/api/v1/employees").then((res) => {
-      this.setState({
-        data: res.data,
+    const { id } = this.props.params;
+    await axios
+      .get(`http://localhost:8080/api/v1/employees/${id}`)
+      .then((res) => {
+        this._fillForm({
+          name: res.data.name,
+          salary: res.data.salary,
+        });
       });
-    });
   };
 
   onSubmit = () => {
     this._validateForm();
     if (this._isFormValid()) {
       const { name, salary } = this.state.form;
+      const { id } = this.props.params;
       axios
-        .post("http://localhost:8080/api/v1/employees", {
+        .put(`http://localhost:8080/api/v1/employees/${id}`, {
           name: name.value,
           salary: salary.value,
         })
@@ -60,7 +71,7 @@ class UpdateEmployee extends Form {
 
   render() {
     const { name, salary } = this.state.form;
-    const { isSuccess, districts } = this.state;
+    const { isSuccess } = this.state;
     if (isSuccess) return <Navigate to={"/employees"} />;
     return (
       <Row>
@@ -84,6 +95,7 @@ class UpdateEmployee extends Form {
                   type="text"
                   required
                   invalid={name.err == "*"}
+                  value={name.value}
                   onChange={(ev) => this._setValue(ev, "name")}
                 />
                 {name.err && <FormFeedback>Name cannot be empty</FormFeedback>}
@@ -97,6 +109,7 @@ class UpdateEmployee extends Form {
                   type="number"
                   required
                   invalid={salary.err == "*"}
+                  value={salary.value}
                   onChange={(ev) => this._setValue(ev, "salary")}
                 />
                 {salary.err && (
@@ -111,4 +124,4 @@ class UpdateEmployee extends Form {
     );
   }
 }
-export default withRouter(UpdateEmployee);
+export default withParams(UpdateEmployee);
